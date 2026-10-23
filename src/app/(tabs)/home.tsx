@@ -42,7 +42,9 @@ export default function HomeScreen() {
         <Text style={styles.brandsTitle}> Brands</Text>
         <Brands setSelectedSlug={setSelectedSlug} />
       </View>
+  
 
+  
 
       <View style={styles.modelsHeader}>
         <Text style={styles.modelsTitle}>Hot Deals</Text>
