@@ -1,0 +1,52 @@
+import { USER_AUTH_STORAGE_KEY } from "@/components/auth/ui/sign-in-form";
+import Header from "@/components/base/header";
+import Button from "@/components/screens/profile/ui/button";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { router } from "expo-router";
+import { StatusBar } from "expo-status-bar";
+import { Pressable, StyleSheet, Text, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+export default function Profile() {
+
+  const clearStorage = async () => {
+    try {
+      await AsyncStorage.setItem(USER_AUTH_STORAGE_KEY, JSON.stringify(false));
+      router.push("/auth/sign-in");
+    } catch (e) {
+      console.error('Failed to clear async storage.', e);
+    }
+  };
+
+  return (
+
+    <SafeAreaView style={styles.container} edges={["left", "right"]}>
+      <Header title="Profile" />
+      <View style={styles.buttonContainer}>
+        <Button onPress={() => clearStorage()}>
+          <Text style={styles.buttonText}>Sign Out</Text>
+        </Button>
+      </View>
+    </SafeAreaView>
+
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+
+  },
+  text: {
+    fontSize: 20,
+    fontWeight: 'bold',
+  },
+  buttonContainer: {
+    marginTop: 24,
+    paddingHorizontal: 16,
+    gap: 16,
+  },
+  buttonText: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#000',
+  },
+});
